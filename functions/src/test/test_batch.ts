@@ -1,9 +1,7 @@
-import * as admin from "firebase-admin";
+import * as admin from 'firebase-admin';
 
-import { regionFunctions, outputLog } from "../helper";
+import { db, regionFunctions, outputLog, errorLog } from "../helper";
 import { constants } from "../constants";
-
-const db = admin.firestore();
 
 /*
  * 毎日11時に全ユーザーのドキュメントを取得し、
@@ -35,6 +33,6 @@ export const testBatch = regionFunctions.pubsub
       await batch.commit();
       outputLog("All user timestamps updated successfully.");
     } catch (error) {
-      outputLog(`Batch update error: ${error}`);
+      errorLog(`Batch update error: ${error}`);
     }
   });

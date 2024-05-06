@@ -1,5 +1,5 @@
-import * as admin from "firebase-admin";
-admin.initializeApp();
+// import * as test from "./test";
+import * as sample from "./sample";
 
-import * as test from "./test";
-export { test };
+// export { test };
+export { sample };
