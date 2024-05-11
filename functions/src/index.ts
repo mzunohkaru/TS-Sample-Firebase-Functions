@@ -1,5 +1,5 @@
-// import * as test from "./test";
-import * as sample from "./sample";
+import * as test from "./test";
+export { test };
 
-// export { test };
+import * as sample from "./sample";
 export { sample };

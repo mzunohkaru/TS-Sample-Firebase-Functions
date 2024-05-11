@@ -8,7 +8,7 @@ import { constants } from "../constants";
  * check フィールドにサーバーの時間を設定して更新します。
  */
 
-export const testBatch = regionFunctions.pubsub
+export const testBatchV1 = regionFunctions.pubsub
   .schedule("every day 11:00")
   .timeZone("Asia/Tokyo")
   .onRun(async (context) => {
