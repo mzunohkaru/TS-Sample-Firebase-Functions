@@ -1,6 +1,6 @@
-import {onCall, HttpsError} from "firebase-functions/v2/https";
+import { onCall, HttpsError } from "firebase-functions/v2/https";
 
-export const testOnCallV2 = onCall((request) => {
+export const onCallV2 = onCall((request) => {
   // ユーザーが認証されていなければエラーを投げる
   if (!request.auth) {
     throw new HttpsError(
@@ -19,10 +19,12 @@ export const testOnCallV2 = onCall((request) => {
     );
   }
 
-  // 処理の結果を返す
-  return {
+  const res = {
     uid: request.auth!.uid,
     name: request.data.name,
     data: request.data,
   };
+
+  // 処理の結果を返す
+  return res;
 });

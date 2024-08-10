@@ -8,7 +8,7 @@ import { constants } from "../constants";
  * 毎日11時に全ユーザーのドキュメントを取得し、
  * check フィールドにサーバーの時間を設定して更新します。
  */
-export const testBatchV2 = onSchedule(
+export const batchV2 = onSchedule(
   {
     schedule: "15 13 * * *",
     region: constants.DEFAULT_REGION,

@@ -7,7 +7,7 @@ import { constants } from "../constants";
  * ユーザーログ (user/v1/user/{userId}/UserLog/{UserLogId}/監視対象)
  */
 
-export const sampleUpdateV2 = onDocumentUpdated(
+export const eventUpdateV2 = onDocumentUpdated(
   `${constants.USERS_PATH}/{userId}/UserLog/{UserLogId}`,
   async (event) => {
     const userId = event.params.userId;
