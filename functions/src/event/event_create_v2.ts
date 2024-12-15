@@ -1,30 +1,21 @@
 import * as admin from "firebase-admin";
-import { onDocumentUpdated } from "firebase-functions/v2/firestore";
+import { onDocumentCreated } from "firebase-functions/v2/firestore";
 
-import { db, outputLog, errorLog } from "../helper";
+import { db } from "../helper";
 import { constants } from "../constants";
 import { userLogConverter } from "./user";
 
 /*
  * ユーザーログ (user/v1/user/{userId}/UserLog/{UserLogId}/監視対象)
  */
-export const eventUpdateV2 = onDocumentUpdated(
+
+export const eventCreateV2 = onDocumentCreated(
   `${constants.USERS_PATH}/{userId}`,
   async (event) => {
     const userId = event.params.userId;
 
-    const beforeData = event.data?.before;
-    const afterData = event.data?.after;
-    outputLog(`beforeData: ${beforeData}`);
-    outputLog(`afterData: ${afterData}`);
-
-    if (beforeData === afterData) {
-      errorLog(`beforeData and afterData are the same`);
-      return;
-    }
-
     await db
-      .doc(`${constants.USERS_PATH}/${userId}/userLog/log`)
+      .doc(`${constants.USERS_PATH}/${userId}/userLog/login`)
       .withConverter(userLogConverter)
       .set(
         {

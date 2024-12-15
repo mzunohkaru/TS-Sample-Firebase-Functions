@@ -6,8 +6,9 @@ export const constants = {
 } as const;
 
 export const functions = {
-  onCall: "onCall",
+  onCallV2: "onCallV2",
   batchV1: "batchV1",
   batchV2: "batchV2",
-  event: "event",
+  eventCreateV2: "eventCreateV2",
+  eventUpdateV2: "eventUpdateV2",
 } as const;
