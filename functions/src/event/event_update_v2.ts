@@ -1,4 +1,8 @@
-import { onDocumentUpdated } from "firebase-functions/v2/firestore";
+import * as admin from "firebase-admin";
+import {
+  onDocumentUpdated,
+  QueryDocumentSnapshot,
+} from "firebase-functions/v2/firestore";
 
 import { db, outputLog, errorLog } from "../helper";
 import { constants } from "../constants";
@@ -8,7 +12,7 @@ import { constants } from "../constants";
  */
 
 export const eventUpdateV2 = onDocumentUpdated(
-  `${constants.USERS_PATH}/{userId}/UserLog/{UserLogId}`,
+  `${constants.USERS_PATH}/{userId}`,
   async (event) => {
     const userId = event.params.userId;
 
@@ -17,24 +21,31 @@ export const eventUpdateV2 = onDocumentUpdated(
     outputLog(`beforeData: ${beforeData}`);
     outputLog(`afterData: ${afterData}`);
 
-    if (beforeData !== afterData) {
-      try {
-        const userDoc = await db.doc(`${constants.USERS_PATH}/${userId}`).get();
-        if (userDoc.exists) {
-          const userData = userDoc.data();
-          const userPoint = userData?.point;
-          outputLog(`UserData: ${userData}`);
-
-          await db
-            .doc(`${constants.USERS_PATH}/${userId}`)
-            .update({ point: userPoint + 1 });
-          outputLog(`User ${userId}'s point updated to ${userPoint + 1}`);
-        } else {
-          errorLog(`User document ${userId} does not exist`);
-        }
-      } catch (error) {
-        errorLog(`Error updating user name: ${error}`);
-      }
+    if (beforeData === afterData) {
+      return;
     }
-  }
+
+    await db
+      .doc(`${constants.USERS_PATH}/${userId}`)
+      .withConverter(userConverter)
+      .set(
+        {
+          readCount: admin.firestore.FieldValue.increment(1),
+        },
+        { merge: true },
+      );
+  },
 );
+
+type Users = {
+  name: string;
+  age: number;
+  male: boolean;
+  createdAt: admin.firestore.Timestamp;
+  readCount: admin.firestore.FieldValue;
+};
+
+const userConverter = {
+  toFirestore: (user: Users) => user,
+  fromFirestore: (snapshot: QueryDocumentSnapshot) => snapshot.data() as Users,
+};
