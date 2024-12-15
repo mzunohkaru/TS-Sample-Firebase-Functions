@@ -5,7 +5,7 @@ export const onCallV2 = onCall((request) => {
   if (!request.auth) {
     throw new HttpsError(
       "failed-precondition",
-      "The function must be called " + "while authenticated."
+      "The function must be called " + "while authenticated.",
     );
   }
 
@@ -15,7 +15,7 @@ export const onCallV2 = onCall((request) => {
     throw new HttpsError(
       "invalid-argument",
       "data.name is undefined.",
-      request.data
+      request.data,
     );
   }
 

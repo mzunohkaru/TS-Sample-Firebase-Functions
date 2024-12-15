@@ -1,5 +1,5 @@
 import * as functions from "firebase-functions";
-import * as admin from 'firebase-admin';
+import * as admin from "firebase-admin";
 
 // Firebaseアプリを初期化
 admin.initializeApp();
@@ -17,4 +17,3 @@ export const outputLog = (message: string) => {
 export const errorLog = (message: string) => {
   functions.logger.error("ERROR: ", message);
 };
-

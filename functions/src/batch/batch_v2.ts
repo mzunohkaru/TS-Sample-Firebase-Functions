@@ -38,5 +38,5 @@ export const batchV2 = onSchedule(
     } catch (error) {
       errorLog(`Batch update error: ${error}`);
     }
-  }
+  },
 );

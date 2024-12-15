@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin';
+import * as admin from "firebase-admin";
 
 import { db, regionFunctions, outputLog, errorLog } from "../helper";
 import { constants } from "../constants";
