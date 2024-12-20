@@ -11,7 +11,8 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "format": "prettier --write ."
+    "lint": "npx biome lint src ",
+    "format": "npx biome format --write src"
   },
   "engines": {
     "node": "20"
@@ -21,6 +22,7 @@
     "firebase-functions": "^5.0.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "firebase-functions-test": "^3.2.0",
     "prettier": "^3.4.2",
     "typescript": "^5.4.5"
