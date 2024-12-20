@@ -12,8 +12,8 @@ export const regionFunctions = functions.region("us-west1");
 
 // method
 export const outputLog = (message: string) => {
-  functions.logger.debug("DEBUG: ", message);
+	functions.logger.debug("DEBUG: ", message);
 };
 export const errorLog = (message: string) => {
-  functions.logger.error("ERROR: ", message);
+	functions.logger.error("ERROR: ", message);
 };

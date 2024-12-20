@@ -1,13 +1,13 @@
-import * as admin from "firebase-admin";
-import { QueryDocumentSnapshot } from "firebase-functions/v2/firestore";
+import type * as admin from "firebase-admin";
+import type { QueryDocumentSnapshot } from "firebase-functions/v2/firestore";
 
 export type UserLog = {
-  updatedAt: admin.firestore.Timestamp;
-  readCount: admin.firestore.FieldValue;
+	updatedAt: admin.firestore.Timestamp;
+	readCount: admin.firestore.FieldValue;
 };
 
 export const userLogConverter = {
-  toFirestore: (userLog: UserLog) => userLog,
-  fromFirestore: (snapshot: QueryDocumentSnapshot) =>
-    snapshot.data() as UserLog,
+	toFirestore: (userLog: UserLog) => userLog,
+	fromFirestore: (snapshot: QueryDocumentSnapshot) =>
+		snapshot.data() as UserLog,
 };
