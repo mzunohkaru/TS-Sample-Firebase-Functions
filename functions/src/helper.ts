@@ -1,14 +1,10 @@
-import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-
+import * as functions from "firebase-functions";
 // Firebaseアプリを初期化
 admin.initializeApp();
 
 // Firestoreインスタンスを作成してエクスポート
 export const db = admin.firestore();
-
-// setting
-export const regionFunctions = functions.region("us-west1");
 
 // method
 export const outputLog = (message: string) => {

@@ -2,7 +2,7 @@ import * as admin from "firebase-admin";
 import { onDocumentCreated } from "firebase-functions/v2/firestore";
 
 import { db } from "../helper";
-import { constants } from "../constants";
+import { PATHS } from "../constants";
 import { userLogConverter } from "./user";
 
 /*
@@ -10,12 +10,12 @@ import { userLogConverter } from "./user";
  */
 
 export const eventCreateV2 = onDocumentCreated(
-	`${constants.USERS_PATH}/{userId}`,
+	`${PATHS.USERS}/{userId}`,
 	async (event) => {
 		const userId = event.params.userId;
 
 		await db
-			.doc(`${constants.USERS_PATH}/${userId}/userLog/login`)
+			.doc(`${PATHS.USERS}/${userId}/userLog/login`)
 			.withConverter(userLogConverter)
 			.set(
 				{

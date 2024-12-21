@@ -10,15 +10,7 @@ if (
 	exports.onCallV2 = onCallV2;
 }
 
-import { batchV1, batchV2 } from "./batch";
-if (
-	!process.env.FUNCTION_TARGET ||
-	process.env.FUNCTION_TARGET === functions.batchV1
-) {
-	testEnv("batchV1");
-	exports.batchV1 = batchV1;
-}
-
+import { batchV2 } from "./batch";
 if (
 	!process.env.FUNCTION_TARGET ||
 	process.env.FUNCTION_TARGET === functions.batchV2

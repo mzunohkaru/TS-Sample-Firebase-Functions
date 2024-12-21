@@ -2,14 +2,14 @@ import * as admin from "firebase-admin";
 import { onDocumentUpdated } from "firebase-functions/v2/firestore";
 
 import { db, outputLog, errorLog } from "../helper";
-import { constants } from "../constants";
+import { PATHS } from "../constants";
 import { userLogConverter } from "./user";
 
 /*
  * ユーザーログ (user/v1/user/{userId}/UserLog/{UserLogId}/監視対象)
  */
 export const eventUpdateV2 = onDocumentUpdated(
-	`${constants.USERS_PATH}/{userId}`,
+	`${PATHS.USERS}/{userId}`,
 	async (event) => {
 		const userId = event.params.userId;
 
@@ -24,7 +24,7 @@ export const eventUpdateV2 = onDocumentUpdated(
 		}
 
 		await db
-			.doc(`${constants.USERS_PATH}/${userId}/userLog/log`)
+			.doc(`${PATHS.USERS}/${userId}/userLog/log`)
 			.withConverter(userLogConverter)
 			.set(
 				{

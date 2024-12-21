@@ -2,7 +2,7 @@ import * as admin from "firebase-admin";
 import { onSchedule } from "firebase-functions/v2/scheduler";
 
 import { db, outputLog, errorLog } from "../helper";
-import { constants } from "../constants";
+import { constants, PATHS } from "../constants";
 
 /*
  * 毎日11時に全ユーザーのドキュメントを取得し、
@@ -22,7 +22,7 @@ export const batchV2 = onSchedule(
 
 		for (const userDoc of usersSnapshot.docs) {
 			const userId = userDoc.id;
-			const userRef = await db.collection(constants.USERS_PATH).doc(userId);
+			const userRef = db.collection(PATHS.USERS).doc(userId);
 			try {
 				batch.update(userRef, {
 					check: admin.firestore.FieldValue.serverTimestamp(),
